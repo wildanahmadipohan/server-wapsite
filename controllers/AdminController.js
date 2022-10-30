@@ -570,6 +570,8 @@ module.exports = {
         message: req.flash('message')
       }
 
+      console.log(header);
+
       const data = {
         title: 'Website Setting',
         header,
