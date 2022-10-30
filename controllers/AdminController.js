@@ -570,8 +570,6 @@ module.exports = {
         message: req.flash('message')
       }
 
-      console.log(header);
-
       const data = {
         title: 'Website Setting',
         header,
@@ -615,9 +613,15 @@ module.exports = {
     try {
       const { id } = req.body;
       const header = await Header.findOne({_id: id});
-
+      
+      console.log(path.join(`public/${header.imageUrl}`));
+      
       if (header.imageUrl) {
-        await fs.unlink(path.join(`public/${header.imageUrl}`));
+        const fileExist = await fs.pathExists(path.join(`public/${header.imageUrl}`));
+
+        if (fileExist) {
+          await fs.unlink(path.join(`public/${header.imageUrl}`));
+        }
       }
 
       header.imageUrl = `images/${req.file.filename}`;
@@ -658,7 +662,11 @@ module.exports = {
       const aboutMe = await AboutMe.findOne();
 
       if (aboutMe.imageUrl) {
-        await fs.unlink(path.join(`public/${aboutMe.imageUrl}`));
+        const fileExist = await fs.pathExists(path.join(`public/${aboutMe.imageUrl}`));
+
+        if (fileExist) {
+          await fs.unlink(path.join(`public/${aboutMe.imageUrl}`));
+        }
       }
 
       aboutMe.imageUrl = `images/${req.file.filename}`;
