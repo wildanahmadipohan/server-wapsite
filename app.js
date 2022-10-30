@@ -10,7 +10,7 @@ const flash = require('connect-flash');
 
 // mongoose connection
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/db_portfolio');
+mongoose.connect('mongodb+srv://wildanahmadipohan:RN7U9js2zsitWDX@cluster0.podhl0t.mongodb.net/db_wapsite?retryWrites=true&w=majority');
 
 var usersRouter = require('./routes/users');
 var indexRouter = require('./routes/index');

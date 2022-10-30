@@ -3,7 +3,7 @@ var seeder = require('mongoose-seed');
 
 // Connect to MongoDB via Mongoose
 // mongodb://localhost:27017/db_portfolio
-seeder.connect('mongodb://localhost:27017/db_portfolio', {
+seeder.connect('mongodb+srv://wildanahmadipohan:RN7U9js2zsitWDX@cluster0.podhl0t.mongodb.net/db_wapsite?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   // useCreateIndex: true,
   // useFindAndModify: true,
