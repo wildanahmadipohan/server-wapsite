@@ -1,0 +1,37 @@
+<form action="/admin/project" method="POST" enctype="multipart/form-data" class="px-3">
+  <div class="input-group input-group-dynamic mb-4">
+    <label class="form-label">Name</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="input-group input-group-dynamic mb-4">
+    <label class="form-label">Tags</label>
+    <input type="text" name="tags" class="form-control" required>
+  </div>
+  <div class="input-group input-group-static mb-4">
+    <label for="category" class="ms-0">Category</label>
+    <select class="form-control" id="category" name="category">
+      <option>--- Select Category ---</option>
+      <% categories.forEach((category) => { %>
+        <option value="<%= category._id %>"><%= category.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="input-group input-group-static mb-4">
+    <label for="stacks" class="ms-0">Stacks</label>
+    <select class="form-control pb-4" multiple id="stacks" name="stacks">
+      <% stacks.forEach((stack) => { %>
+        <option value="<%= stack._id %>"><%= stack.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="input-group input-group-static mb-4">
+    <label for="image">Image</label>
+    <input class="form-control" type="file" name="image" id="image" multiple required>
+  </div>
+  <div class="input-group input-group-static mb-4">
+    <textarea class="form-control" id="description" name="description" rows="3">
+      Project Descriptions
+    </textarea>
+  </div>
+  <button type="submit" class="btn bg-gradient-primary">Add</button>
+</form>

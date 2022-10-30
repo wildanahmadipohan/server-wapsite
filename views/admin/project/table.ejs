@@ -1,0 +1,51 @@
+<div class="table-responsive">
+  <table class="table align-items-center mb-0">
+    <thead>
+      <tr>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Slug</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
+        <th width="15%" class="text-secondary opacity-7"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% projects.forEach((project) => { %>
+        <tr>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= project.name %></p>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= project.slug %></p>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= project.categoryId.name %></p>
+            </div>
+          </td>
+
+          <td class="align-middle">
+            <form action="/admin/project/<%= project._id %>?_method=DELETE" method="POST">
+
+              <a href="/admin/project/<%= project._id %>" class="text-info font-weight-normal text-xs pe-3" data-toggle="tooltip" data-original-title="View project">
+                View
+              </a>
+
+              <a href="/admin/project/edit/<%= project._id %>" class="text-secondary font-weight-normal text-xs pe-3" data-toggle="tooltip" data-original-title="Edit project">
+                Edit
+              </a>
+
+              <button type="submit" class="btn btn-sm text-danger font-weight-normal text-xs py-0 my-0 px-0" data-toggle="tooltip" data-original-title="Delete project" style="text-transform: capitalize;">
+                Delete
+              </button>
+
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

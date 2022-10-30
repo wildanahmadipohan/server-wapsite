@@ -1,0 +1,76 @@
+<!-- include header layout -->
+<%- include('../../layouts/header.ejs') %>
+
+<!-- include sidebar layout -->
+<%- include('../../layouts/sidebar.ejs') %> 
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <%- include('../../layouts/navbar.ejs') %>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Main Content -->
+      <div class="row">
+        <div class="col-6">
+          <%- include('category_table.ejs', { categories }) %>
+        </div>
+        <div class="col-6">
+          <%- include('stack_table.ejs', { stacks }) %>
+        </div>
+      </div>
+      <!-- End Main Content -->
+
+      <!-- include footer layout -->
+      <%- include('../../layouts/footer.ejs') %>
+    </div>
+  </main>
+  <!-- include setting layout -->
+  <%- include('../../layouts/setting.ejs') %>
+
+  <!-- include modal -->
+  <%- include('category_modal_add.ejs') %>
+  <%- include('category_modal_edit.ejs') %>
+  <%- include('stack_modal_add.ejs') %>
+  <%- include('stack_modal_edit.ejs') %>
+
+  <!--   Core JS Files   -->
+  <%- include('../../layouts/script.ejs') %>
+
+  <script>
+    const categoryTable = document.querySelector('.table-category');
+    const editCategoryButtons = categoryTable.querySelectorAll('.category-edit');
+    const editCategoryModal = document.querySelector('#modalEditCategory');
+    const editCategoryModalInstance = new bootstrap.Modal(editCategoryModal);
+
+    editCategoryButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+
+        const nameInput = editCategoryModal.querySelector('input[name="name"]').value = name;
+        const idInput = editCategoryModal.querySelector('input[name="id"').value = id;
+
+        editCategoryModalInstance.show();
+      })
+    })
+
+    const stackTable = document.querySelector('.table-stack');
+    const editStackButtons = stackTable.querySelectorAll('.stack-edit');
+    const editStackModal = document.querySelector('#modalEditStack');
+    const editStackModalInstance = new bootstrap.Modal(editStackModal);
+
+    
+    editStackButtons.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        
+        const nameInput = editStackModal.querySelector('input[name="name"]').value = name;
+        const idInput = editStackModal.querySelector('input[name="id"]').value = id;
+
+        editStackModalInstance.show();
+      });
+    });
+  </script>
+</body>
+
+</html>

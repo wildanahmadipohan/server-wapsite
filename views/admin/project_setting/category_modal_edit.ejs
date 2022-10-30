@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="modalEditCategory" tabindex="-1" role="dialog" aria-labelledby="modalAddLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-normal" id="modalAddLabel">Edit Category</h5>
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/admin/project-setting/category?_method=PUT" method="POST">
+        <div class="modal-body">
+          <div class="input-group input-group-dynamic mb-4 focus is-focused">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required>
+            <input type="hidden" name="id">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn bg-gradient-primary">Update</butt>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

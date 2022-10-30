@@ -1,0 +1,83 @@
+<% if (alert.message != '') { %>
+<div class="alert alert-<%= alert.status %> text-white" role="alert">
+    <%= alert.message %>
+</div>
+<% } %>
+
+<div class="card">
+  <div class="card-header pb-0 p-3">
+    <div class="row">
+      <div class="col-6 d-flex align-items-center">
+        <h6 class="mb-0">My Certificate</h6>
+      </div>
+      <div class="col-6 text-end">
+        <button type="button" class="btn btn-sm bg-gradient-primary pb-2" data-bs-toggle="modal" data-bs-target="#modalAdd">
+          <i class="material-icons text-sm">add</i>
+          &nbsp;&nbsp;Add New Certificate
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0 table-certificate">
+      <thead>
+        <tr>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Organization</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">date</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Credential Url</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Image</th>
+          <th width="15%" class="text-secondary opacity-7"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% certificates.forEach((certificate, index) => { %>
+        <tr>
+          <td class="align-middle">
+            <p class="text-xs px-2 py-1">
+              <%= index + 1 %>
+            </p>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= certificate.name %></p>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= certificate.organization %></p>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%- certificate.date.toLocaleDateString('en-us', { year:"numeric", month:"short"}) %></p>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1">
+              <p class="text-xs"><%= certificate.credentialUrl %></p>
+            </div>
+          </td>
+          <td>
+            <img src="http://localhost:3000/<%= certificate.imageUrl %>" alt="<%= certificate.name %>" width="100">
+          </td>
+          <td class="align-middle">
+            <form action="/admin/certificate/<%= certificate._id %>?_method=DELETE" method="POST">
+
+              <a href="javascript:;" class="text-secondary font-weight-normal text-xs pe-3 certificate-edit" data-toggle="tooltip" data-original-title="Edit Certificate" data-id="<%= certificate._id %>" data-name="<%= certificate.name %>" data-organization="<%= certificate.organization %>" data-credentialUrl="<%= certificate.credentialUrl %>" data-date="<%= certificate.date %>">
+                Edit
+              </a>
+              <button type="submit" class="btn btn-sm text-danger font-weight-normal text-xs py-0 my-0" data-toggle="tooltip" data-original-title="Delete Certificate" style="text-transform: capitalize;">
+                Delete
+              </button>
+
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

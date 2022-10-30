@@ -1,0 +1,61 @@
+<% if (alert.message != '' && alert.name == 'stackAlert') { %>
+<div class="alert alert-<%= alert.status %> text-white" role="alert">
+    <%= alert.message %>
+</div>
+<% } %>
+
+<div class="card">
+  <div class="card-header pb-0 p-3">
+    <div class="row">
+      <div class="col-6 d-flex align-items-center">
+        <h6 class="mb-0">Stack Project</h6>
+      </div>
+      <div class="col-6 text-end">
+        <button type="button" class="btn btn-sm bg-gradient-primary pb-2" data-bs-toggle="modal" data-bs-target="#modalAddStack">
+          <i class="material-icons text-sm">add</i>
+          &nbsp;&nbsp;Add New Stack
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-stack align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+          <th width="100" class="text-secondary opacity-7"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% stacks.forEach((stack, index) => { %>
+        <tr>
+          <td class="align-middle">
+            <span class="text-xs px-2 py-1">
+              <%= index + 1 %>
+            </span>
+          </td>
+          <td>
+            <div class="d-flex px-2 py-1 text-xs">
+              <%= stack.name %>
+            </div>
+          </td>
+          <td class="align-middle">
+            <form action="/admin/project-setting/stack/<%= stack._id %>?_method=DELETE" method="POST">
+
+              <a href="javascript:;" class="text-secondary font-weight-normal text-xs pe-3 stack-edit" data-id="<%= stack.id %>" data-name="<%= stack.name %>" data-toggle="tooltip" data-original-title="Edit project">
+                Edit
+              </a>
+
+              <button type="submit" class="btn btn-sm text-danger font-weight-normal py-0 my-0" data-toggle="tooltip" data-original-title="Delete project" style="text-transform: capitalize">
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

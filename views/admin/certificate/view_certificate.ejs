@@ -1,0 +1,55 @@
+<!-- include header layout -->
+<%- include('../../layouts/header.ejs') %>
+
+<!-- include sidebar layout -->
+<%- include('../../layouts/sidebar.ejs') %> 
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <%- include('../../layouts/navbar.ejs') %>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Main Content -->
+      <%- include('table.ejs', { certificates }) %>
+      <!-- End Main Content -->
+
+      <!-- include footer layout -->
+      <%- include('../../layouts/footer.ejs') %>
+    </div>
+  </main>
+  <!-- include setting layout -->
+  <%- include('../../layouts/setting.ejs') %>
+
+  <!-- include modal -->
+  <%- include('modal_add.ejs') %>
+  <%- include('modal_edit.ejs') %>
+
+  <!--   Core JS Files   -->
+  <%- include('../../layouts/script.ejs') %>
+
+  <script>
+    const certificateTable = document.querySelector('.table-certificate');
+    const editCertificateButtons = certificateTable.querySelectorAll('.certificate-edit');
+    const editCertificateModal = document.querySelector('#modalEdit');
+    const editCertificateModalInstance = new bootstrap.Modal(editCertificateModal);
+
+    editCertificateButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const organization = btn.getAttribute('data-organization');
+        const credentialUrl = btn.getAttribute('data-credentialUrl');
+        const date = btn.getAttribute('data-date');
+
+        const idInput = editCertificateModal.querySelector('input[name="id"]').value = id;
+        const nameInput = editCertificateModal.querySelector('input[name="name"]').value = name;
+        const organizationInput = editCertificateModal.querySelector('input[name="organization"]').value = organization;
+        const credentialUrlInput = editCertificateModal.querySelector('input[name="credentialUrl"]').value = credentialUrl;
+        const dateInput = editCertificateModal.querySelector('input[name="date"]').value = new Date(date).toISOString().substring(0,10);;
+
+        editCertificateModalInstance.show();
+      })
+    })
+  </script>
+</body>
+
+</html>

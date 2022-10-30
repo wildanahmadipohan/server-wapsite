@@ -1,0 +1,50 @@
+<!-- include header layout -->
+<%- include('../../layouts/header.ejs') %>
+
+<!-- include sidebar layout -->
+<%- include('../../layouts/sidebar.ejs') %> 
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <%- include('../../layouts/navbar.ejs') %>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Main Content -->
+      <!-- Button trigger modal -->
+      <%- include('./table.ejs', { abilities }) %>
+      <!-- End Main Content -->
+      
+      <!-- include footer layout -->
+      <%- include('../../layouts/footer.ejs') %>
+    </div>
+  </main>
+  <!-- include setting layout -->
+  <%- include('../../layouts/setting.ejs') %>
+  
+  <!-- inlude modal -->
+  <%- include('modal_add.ejs') %>
+  <%- include('modal_edit.ejs') %>
+
+  <!--   Core JS Files   -->
+  <%- include('../../layouts/script.ejs') %>
+
+  <script>
+    const abilityTable = document.querySelector('.table-ability');
+    const editAbilityButtons = abilityTable.querySelectorAll('.ability-edit');
+    const editAbilityModal = document.querySelector('#modalEdit');
+    const editAbilityModalInstance = new bootstrap.Modal(editAbilityModal);
+
+    editAbilityButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        
+        const idInput = editAbilityModal.querySelector('input[name="id"]').value = id;
+        const nameInput = editAbilityModal.querySelector('input[name="name"]').value = name;
+
+        editAbilityModalInstance.show();
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!-- include header layout -->
+<%- include('../../layouts/header.ejs') %>
+
+<!-- include sidebar layout -->
+<%- include('../../layouts/sidebar.ejs') %> 
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <%- include('../../layouts/navbar.ejs') %>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Main Content -->
+      <div class="card">
+        <div class="card-body">
+          <p>Welcome to Content Management System of WAPSite. </p>
+        </div>
+      </div>
+      <!-- End Main Content -->
+
+      <!-- include footer layout -->
+      <%- include('../../layouts/footer.ejs') %>
+    </div>
+  </main>
+  <!-- include setting layout -->
+  <%- include('../../layouts/setting.ejs') %>
+
+  <!--   Core JS Files   -->
+  <%- include('../../layouts/script.ejs') %>
+</body>
+
+</html>

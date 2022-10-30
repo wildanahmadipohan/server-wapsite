@@ -1,0 +1,165 @@
+<!-- include header layout -->
+<%- include('../../layouts/header.ejs') %>
+
+<!-- include sidebar layout -->
+<%- include('../../layouts/sidebar.ejs') %> 
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <%- include('../../layouts/navbar.ejs') %>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Main Content -->
+      <% if (alert.message != '') { %>
+      <div class="alert alert-<%= alert.status %> text-white" role="alert">
+          <%= alert.message %>
+      </div>
+      <% } %>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="card mb-4">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-6 d-flex align-items-center">
+                    <h6 class="mb-0">Header Hero</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="card card-body border border-radius-lg card-plain mb-4">
+                  <img src="http://localhost:3000/<%= header.imageUrl %>" alt="Hero" style="width: 100%;">
+                </div>
+                <form action="/admin/website-setting/header-hero?_method=PUT" method="POST" enctype="multipart/form-data">
+                  <div class="input-group input-group-static mb-4">
+                    <input class="form-control" type="file" name="image" id="image" required>
+                    <span class="text-xs">Browse for change image.</span>
+                    <input type="hidden" name="id" value="<%= header._id %>">
+                  </div>
+                  <button type="submit" class="btn w-100 bg-gradient-primary">Update</button>
+                </form>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-6 d-flex align-items-center">
+                    <h6 class="mb-0">About Me Hero</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="card card-body border border-radius-lg card-plain mb-4">
+                  <img src="http://localhost:3000/<%= aboutMe.imageUrl %>" alt="Hero" style="width: 100%;">
+                </div>
+                <form action="/admin/website-setting/aboutme-hero?_method=PUT" method="POST" enctype="multipart/form-data">
+                  <div class="input-group input-group-static mb-4">
+                    <input class="form-control" type="file" name="image" id="image" required>
+                    <span class="text-xs">Browse for change image.</span>
+                    <input type="hidden" name="id" value="<%= aboutMe._id %>">
+                  </div>
+                  <button type="submit" class="btn w-100 bg-gradient-primary">Update</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12 mb-lg-0 mb-4">
+              <div class="card">
+                <div class="card-header pb-0 p-3">
+                  <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                      <h6 class="mb-0">Header</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-3">
+                  <form action="/admin/website-setting/header?_method=PUT" method="POST">
+                    <div class="row">
+                      <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="input-group input-group-outline mb-4 focus is-focused">
+                          <label class="form-label">Title 1</label>
+                          <input type="text" class="form-control" name="title1" value="<%= header.title[0] %>">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="input-group input-group-outline mb-4 focus is-focused">
+                          <label class="form-label">Title 2</label>
+                          <input type="text" class="form-control" name="title2" value="<%= header.title[1] %>">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-group">
+                        <label for="subtitle">Subtitle</label>
+                        <textarea class="form-control" id="subtitle" name="subtitle" rows="3">
+                          <%= header.subtitle %>
+                        </textarea>
+                      </div>
+                    </div>
+                    <input type="hidden" name="id" value="<%= header._id %>">
+                    <button type="submit" class="btn bg-gradient-primary mt-4">Update</button>
+                  </form>
+                </div>
+                <div class="card-header pb-0 p-3">
+                  <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                      <h6 class="mb-0">About Me</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-3">
+                  <form action="/admin/website-setting/aboutme?_method=PUT" method="POST">
+                    <div class="row">
+                      <div class="input-group">
+                        <label for="description">About Me</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">
+                          <%= aboutMe.description %>
+                        </textarea>
+                      </div>
+                    </div>
+                    <input type="hidden" name="id" value="<%= aboutMe._id %>">
+                    <button type="submit" class="btn bg-gradient-primary mt-4">Update</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- End Main Content -->
+
+      <!-- include footer layout -->
+      <%- include('../../layouts/footer.ejs') %>
+    </div>
+  </main>
+  <!-- include setting layout -->
+  <%- include('../../layouts/setting.ejs') %>
+
+  <!--   Core JS Files   -->
+  <%- include('../../layouts/script.ejs') %>
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#subtitle'))
+      .then(editor => {
+        // console.log( editor );
+      })
+      .catch( error => {
+        console.error( error );
+      });
+
+    ClassicEditor
+      .create(document.querySelector('#description'))
+      .then(editor => {
+        // console.log( editor );
+      })
+      .catch( error => {
+        console.error( error );
+      });
+  </script>
+</body>
+
+</html>
