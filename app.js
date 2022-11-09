@@ -7,6 +7,7 @@ var logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const cors = require('cors');
 
 // mongoose connection
 const mongoose = require('mongoose');
@@ -23,6 +24,23 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// cors setting
+const whiteList = ["http://localhost:3000"]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whiteList.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
+
+app.use(cors(corsOptions));
+
+
+// setting session
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(methodOverride('_method'));
 app.use(session({
