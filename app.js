@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // cors setting
-const whiteList = ["http://localhost:3000"]
+const whiteList = ["http://localhost:3000", "https://admin-wapsite.herokuapp.com/"]
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whiteList.indexOf(origin) !== -1) {
