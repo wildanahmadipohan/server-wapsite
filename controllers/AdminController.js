@@ -428,7 +428,13 @@ module.exports = {
       ability.name = name;
 
       if (req.file != undefined) {
-        await fs.unlink(path.join(`public/${ability.imageUrl}`));
+        if (ability.imageUrl) {
+          const fileExist = await fs.pathExists(path.join(`public/${ability.imageUrl}`));
+
+          if (fileExist) {
+            await fs.unlink(path.join(`public/${ability.imageUrl}`));
+          }
+        }
         ability.imageUrl = `images/${req.file.filename}`;
       }
 
@@ -448,7 +454,14 @@ module.exports = {
     try {
       const { id } = req.params;
       const ability = await Ability.findOne({_id: id});
-      await fs.unlink(path.join(`public/${ability.imageUrl}`));
+      
+      if (ability.imageUrl) {
+        const fileExist = await fs.pathExists(path.join(`public/${ability.imageUrl}`));
+
+        if (fileExist) {
+          await fs.unlink(path.join(`public/${ability.imageUrl}`));
+        }
+      }
       await ability.remove();
 
       req.flash('status', 'success');
@@ -522,8 +535,14 @@ module.exports = {
       certificate.date = date;
 
       if (req.file != undefined) {
-        await fs.unlink(path.join(`public/${certificate.imageUrl}`));
-        certificate.imageUrl = `images/${req.file.filename}`;
+        if (certificate.imageUrl) {
+          const fileExist = await fs.pathExists(path.join(`public/${certificate.imageUrl}`));
+
+          if (fileExist) {
+            await fs.unlink(path.join(`public/${certificate.imageUrl}`));
+          }
+          certificate.imageUrl = `images/${req.file.filename}`;
+        }
       }
 
       await certificate.save();
@@ -544,8 +563,15 @@ module.exports = {
     try {
       const { id } = req.params;
       const certificate = await Certificate.findOne({_id: id});
+      
+      if (certificate.imageUrl) {
+        const fileExist = await fs.pathExists(path.join(`public/${certificate.imageUrl}`));
 
-      await fs.unlink(path.join(`public/${certificate.imageUrl}`));
+        if (fileExist) {
+          await fs.unlink(path.join(`public/${certificate.imageUrl}`));
+        }
+      }
+
       await certificate.remove();
 
       req.flash('status', 'success');
