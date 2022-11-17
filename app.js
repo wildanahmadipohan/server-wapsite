@@ -25,19 +25,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // cors setting
-const whiteList = ["http://localhost:3000",]
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whiteList.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials: true
+const allowlist = ['http://localhost:3000'];
+
+const corsOptionsDelegate = function (req, callback) {
+  let corsOptions;
+  if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptionsDelegate));
 
 
 // setting session
