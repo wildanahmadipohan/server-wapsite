@@ -44,11 +44,12 @@ app.use(cors(corsOptionsDelegate));
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'inikodErahAsiaGu3',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: oneDay }
+  cookie: { maxAge: Date.now() + oneDay }
 }))
+
 app.use(flash());
 
 app.use(logger('dev'));

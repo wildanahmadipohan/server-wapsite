@@ -47,7 +47,7 @@ module.exports = {
             id: user._id,
             username: user.username
           };
-
+          
           res.redirect('/admin/dashboard');
         }
       }
