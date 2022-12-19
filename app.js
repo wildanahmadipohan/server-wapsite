@@ -40,15 +40,21 @@ const corsOptionsDelegate = function (req, callback) {
 app.use(cors(corsOptionsDelegate));
 
 
+app.use(methodOverride('_method'));
+
 // setting session
 const oneDay = 1000 * 60 * 60 * 24;
-
-app.use(methodOverride('_method'));
+app.enable('trust proxy',true);
+app.use(cookieParser());
 app.use(session({
+  proxy: true,
   secret: 'inikodErahAsiaGu3',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: Date.now() + oneDay }
+  cookie: {
+    maxAge: Date.now() + oneDay,
+    sameSite: 'none'
+  }
 }))
 
 app.use(flash());
