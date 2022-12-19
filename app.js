@@ -44,10 +44,10 @@ app.use(methodOverride('_method'));
 
 // setting session
 const oneDay = 1000 * 60 * 60 * 24;
-app.enable('trust proxy',true);
+// app.enable('trust proxy',true);
 app.use(cookieParser());
 app.use(session({
-  proxy: true,
+  // proxy: true,
   secret: 'inikodErahAsiaGu3',
   resave: false,
   saveUninitialized: true,
