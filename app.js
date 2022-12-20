@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const methodOverride = require('method-override');
-const session = require('express-session');
+// const session = require('express-session');
+const session = require('cookie-session');
 const flash = require('connect-flash');
 const cors = require('cors');
 
